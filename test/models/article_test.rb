@@ -8,14 +8,17 @@ class ArticleTest < ActiveSupport::TestCase
 
   test "should be invalid when title is more than 50" do
     assert validate_article_field_length({ title: generate_string(50) }).invalid?
+    assert validate_article_field_length({ title: generate_string(49) }).valid?
   end
 
   test "should be invalid when description is more than 200" do
     assert validate_article_field_length({ description: generate_string(200) }).invalid?
+    assert validate_article_field_length({ description: generate_string(199) }).valid?
   end
 
-  test "should be invalid when content is more than 1000" do
-    assert validate_article_field_length({ content: generate_string(1000) }).invalid?
+  test "should be invalid when content is more than 200000" do
+    assert validate_article_field_length({ content: generate_string(200000) }).invalid?
+    assert validate_article_field_length({ content: generate_string(199999) }).valid?
   end
 
   private
