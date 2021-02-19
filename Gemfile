@@ -33,6 +33,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use Redcarpet process Markdown
+gem 'redcarpet', '~> 3.5'
+# Use CodeRay render code in Markdown
+gem 'coderay', '~> 1.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
