@@ -10,6 +10,23 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+@import "bootstrap";
+@import "/\*";
+
+.blog-header {
+  line-height: 1;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #7952b3;
+
+  a:hover {
+    text-decoration: none;
+    color: #f8f9fa !important;
+  }
+
+  .blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 3.25em;
+  }
+}

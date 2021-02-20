@@ -5,7 +5,7 @@ class BlogControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_not_nil assigns(:articles)
-    assert_select "tbody tr", assigns(:articles).size
+    assert_select "div .card", assigns(:articles).size
   end
 
 end
