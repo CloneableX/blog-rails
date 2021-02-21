@@ -46,4 +46,11 @@ class ArticlesControllerTest < ActionController::TestCase
 
     assert_redirected_to articles_path
   end
+
+  test "should redirect to login page when access listing articles without logining" do
+    logout
+    get :index
+    assert_redirected_to login_path
+    assert_equal 'Please sign in!', flash[:notice]
+  end
 end
