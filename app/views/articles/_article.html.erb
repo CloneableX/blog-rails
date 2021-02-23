@@ -3,11 +3,18 @@
     <div class="card-body">
       <h5 class="card-title"><%= article.title %></h5>
       <div class="card-text text-muted"><%= markdown_to_html(article.description) %></div>
-      <%= link_to 'Continue reading', article, target: '_blank', class: 'card-link' %>
-      <% if defined?(maintainable) && maintainable %>
-        <%= link_to 'Edit', edit_article_path(article), class: 'card-link' %>
-        <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link' %>
-      <% end %>
+      <div class="row">
+       <div class="col-10">
+          <%= link_to 'Continue reading', article, target: '_blank', class: 'card-link' %>
+          <% if defined?(maintainable) && maintainable %>
+            <%= link_to 'Edit', edit_article_path(article), class: 'card-link' %>
+            <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link' %>
+          <% end %>
+        </div>
+        <div class="col-2">
+          <span class="badge badge-pill badge-info"><%= article.catalog.try(:title) %></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

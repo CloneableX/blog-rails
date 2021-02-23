@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :catalogs
   root 'blog#index', as: 'blog', via: :all
 
   resources :articles

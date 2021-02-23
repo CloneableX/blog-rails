@@ -21,10 +21,11 @@ class ArticleTest < ActiveSupport::TestCase
     assert validate_article_field_length({ content: generate_string(199999) }).valid?
   end
 
+  test "should return articles without content field" do
+    articles = Article.list
+    assert articles.first.attributes.exclude?(:content)
+  end
   private
-    def generate_string(length)
-      (1..length + 1).map { 'a' }.join
-    end
 
     def validate_article_field_length(valid_field_hash)
       Article.create({

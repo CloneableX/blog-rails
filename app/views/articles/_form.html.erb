@@ -16,6 +16,10 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <%= f.label :catalog_id %>
+    <%= f.select :catalog_id, Catalog.all.collect { |catalog| [catalog.title, catalog.id] }, prompt: '--select--' %>
+  </div>
+  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>

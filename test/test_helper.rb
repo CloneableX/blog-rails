@@ -15,6 +15,10 @@ class ActiveSupport::TestCase
     session.delete :user_id
   end
 
+  def generate_string(length)
+    (1..length + 1).map { 'a' }.join
+  end
+    
   def setup
     login_as :one if defined? session
   end

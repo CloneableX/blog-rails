@@ -2,11 +2,6 @@
 
 one:
   title: MyString
-  description: MyText
-  content: MyText
-  catalog: one
 
 two:
   title: MyString
-  description: MyText
-  content: MyText
