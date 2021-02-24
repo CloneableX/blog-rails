@@ -36,7 +36,7 @@ class SessionsControllerTest < ActionController::TestCase
 
   test "should get destroy" do
     delete :destroy
-    assert_redirected_to blog_url
+    assert_redirected_to root_path
     assert_nil session[:user_id]
   end
 

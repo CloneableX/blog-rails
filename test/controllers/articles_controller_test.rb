@@ -48,10 +48,27 @@ class ArticlesControllerTest < ActionController::TestCase
     assert_redirected_to articles_path
   end
 
-  test "should redirect to login page when access listing articles without logining" do
+  test "should redirect to login page when editing articles without logining" do
     logout
-    get :index
+    get :edit, id: @article
     assert_redirected_to login_path
     assert_equal 'Please sign in!', flash[:notice]
+  end
+
+  test "should search articles by title" do
+    post :search, title: @article.title
+    assert_response :success
+    titles = assigns(:articles).collect { |article| article.title }
+                                .select { |title| title.include?(articles(:one).title) }
+    assert_equal assigns(:articles).size, titles.size                            
+  end
+
+  test "should search articles by catalog" do
+    get :catalog, catalog_id: @article.catalog.id
+    assert_response :success
+
+    catalog_ids = assigns(:articles).collect { |article| article.catalog.id }
+                       .select { |catalog_id| catalog_id == @article.catalog.id }
+    assert !catalog_ids.empty?                   
   end
 end

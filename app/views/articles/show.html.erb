@@ -1,5 +1,26 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <p id="notice"><%= flash[:notice] %></p>
+<% end %>
 
-<h1 class="text-center"><%= @article.title %></h1>
-
-<%= markdown_to_html(@article.content) %>
+<div class="row border-bottom border-secondary mb-3">
+  <div class="col-9">
+    <h1>
+      <%= @article.title %>
+      <p class="text-muted mt-1">updated at <%= @article.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></p>
+    </h1>
+  </div>
+  <div class="col-3 pt-4">
+    <% if session[:user_id] %>
+      <%= link_to 'Edit', edit_article_path(@article), class: 'btn btn-primary' %>
+      <%= link_to 'Back', articles_path, class: 'btn btn-light' %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-8">
+    <%= markdown_to_html(@article.content) %>
+  </div>
+  <div class="col-4">
+    <%= render 'catalogs/catalogs' %>   
+  </div>
+</div>

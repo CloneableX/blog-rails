@@ -1,8 +1,17 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <p id="notice"><%= flash[:notice] %></p>
+<% end %>
 
-<h1>Listing Articles</h1>
-
-<%= render partial: @articles, locals: { maintainable: true } %>
+<div class="row">
+  <div class="col-8">
+    <%= render partial: @articles %>
+  </div>
+  <div class="col-4">
+    <%= render 'catalogs/catalogs' %>
+  </div>
+</div>
 <br>
 
-<%= link_to 'New Article', new_article_path %>
+<% if session[:user_id] %>
+  <%= link_to 'New Article', new_article_path %>
+<% end %>

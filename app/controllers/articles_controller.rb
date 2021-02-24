@@ -1,12 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
-  skip_before_action :authorize, only: [:show]
+  skip_before_action :authorize, only: [:index, :show, :search, :catalog]
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.list
+    @articles = Article.list.where("title like ?", "%#{params[:title]}%")
   end
 
   # GET /articles/1
@@ -60,6 +60,22 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /articles/search
+  def search
+    @articles = Article.list.where("title like ?", "%#{params[:title]}%")
+    respond_to do |format|
+      format.html { render :index }
+    end
+  end
+
+  # GET /articles/catalog/:catalog_id
+  def catalog
+    @articles = Article.list.where(catalog_id: params[:catalog_id])
+    respond_to do |format|
+      format.html { render :index }
     end
   end
 

@@ -1,0 +1,6 @@
+<div class="list-group">
+  <%= link_to 'All', articles_path, class: 'list-group-item list-group-item-action' %>
+  <% Catalog.all.each do |catalog| %>
+    <%= link_to catalog.title, catalog_articles_path(catalog.id), class: 'list-group-item list-group-item-action' %>
+  <% end %>
+</div>

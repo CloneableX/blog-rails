@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
   
   resources :catalogs
-  root 'blog#index', as: 'blog', via: :all
+  root 'articles#index'
 
-  resources :articles
+  resources :articles do
+    collection do
+      post 'search'
+      get 'catalog/:catalog_id' => :catalog, as: 'catalog'
+    end
+  end
 
   controller :sessions do
     get 'login' => :new

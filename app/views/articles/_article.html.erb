@@ -6,7 +6,7 @@
       <div class="row">
        <div class="col-10">
           <%= link_to 'Continue reading', article, target: '_blank', class: 'card-link' %>
-          <% if defined?(maintainable) && maintainable %>
+          <% if session[:user_id] %>
             <%= link_to 'Edit', edit_article_path(article), class: 'card-link' %>
             <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }, class: 'card-link' %>
           <% end %>
