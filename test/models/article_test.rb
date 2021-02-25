@@ -32,9 +32,9 @@ class ArticleTest < ActiveSupport::TestCase
 
     articles_page = Article.paginate(2)
     
-    assert_equal 7, articles_page.size
+    assert_equal 10, articles_page.size
     assert_equal Article.count, articles_page.total_count
-    assert_equal 2, articles_page.total_pages
+    assert_equal 4, articles_page.total_pages
   end
 
   private
