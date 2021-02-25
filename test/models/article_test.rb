@@ -25,6 +25,18 @@ class ArticleTest < ActiveSupport::TestCase
     articles = Article.list
     assert articles.first.attributes.exclude?(:content)
   end
+
+  test "should paginating articles" do
+    articles = (1..30).collect { {title: 'Introduce', content: 'Introduce ...' } }
+    Article.create(articles)
+
+    articles_page = Article.paginate(2)
+    
+    assert_equal 7, articles_page.size
+    assert_equal Article.count, articles_page.total_count
+    assert_equal 2, articles_page.total_pages
+  end
+
   private
 
     def validate_article_field_length(valid_field_hash)

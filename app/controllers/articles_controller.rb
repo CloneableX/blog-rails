@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.list.where("title like ?", "%#{params[:title]}%")
+    @articles = Article.paginate params[:page]
   end
 
   # GET /articles/1
