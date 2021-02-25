@@ -71,4 +71,11 @@ class ArticlesControllerTest < ActionController::TestCase
                        .select { |catalog_id| catalog_id == @article.catalog.id }
     assert !catalog_ids.empty?                   
   end
+
+  test "should descript test case" do
+    articles_num = catalogs(:one).articles_num
+    post :create, article: { content: @article.content, description: @article.description, title: @article.title, catalog_id: catalogs(:one).id }
+
+    assert_equal articles_num + 1, assigns(:article).catalog.articles_num
+  end
 end

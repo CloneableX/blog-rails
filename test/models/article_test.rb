@@ -37,6 +37,13 @@ class ArticleTest < ActiveSupport::TestCase
     assert_equal 4, articles_page.total_pages
   end
 
+  test "should catalog articles number increase one" do
+    article = Article.new(title: 'Introduce', content: 'Introduce...', catalog_id: catalogs(:one).id)
+    articles_num = article.catalog.articles_num
+    article.save
+    assert_equal articles_num + 1, article.catalog.articles_num
+  end
+
   private
 
     def validate_article_field_length(valid_field_hash)
