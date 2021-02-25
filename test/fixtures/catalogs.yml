@@ -2,6 +2,7 @@
 
 one:
   title: MyString
+  articles_num: 1
 
 two:
   title: MyString

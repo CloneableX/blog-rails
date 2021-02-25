@@ -6,6 +6,9 @@ class Article < ActiveRecord::Base
 
   belongs_to :catalog
 
+  after_create { catalog.increase_articles_num if catalog }
+  after_destroy { catalog.minus_articles_num if catalog }
+
   def self.list
     Article.includes(:catalog).select(:id, :title, :description, :catalog_id).order('updated_at desc')
   end
@@ -13,4 +16,5 @@ class Article < ActiveRecord::Base
   def self.paginate(page)
     self.list.page(page)
   end
+
 end
