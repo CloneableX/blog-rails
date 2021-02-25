@@ -65,7 +65,7 @@ class ArticlesController < ApplicationController
 
   # POST /articles/search
   def search
-    @articles = Article.list.where("title like ?", "%#{params[:title]}%")
+    @articles = Article.paginate(params[:page]).where("title like ?", "%#{params[:title]}%")
     respond_to do |format|
       format.html { render :index }
     end
@@ -73,7 +73,7 @@ class ArticlesController < ApplicationController
 
   # GET /articles/catalog/:catalog_id
   def catalog
-    @articles = Article.list.where(catalog_id: params[:catalog_id])
+    @articles = Article.paginate(params[:page]).where(catalog_id: params[:catalog_id])
     respond_to do |format|
       format.html { render :index }
     end
