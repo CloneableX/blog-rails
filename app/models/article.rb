@@ -9,4 +9,8 @@ class Article < ActiveRecord::Base
   def self.list
     Article.includes(:catalog).select(:id, :title, :description, :catalog_id).order('updated_at desc')
   end
+
+  def self.paginate(page)
+    self.list.page(page)
+  end
 end
