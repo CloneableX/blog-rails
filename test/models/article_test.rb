@@ -37,11 +37,24 @@ class ArticleTest < ActiveSupport::TestCase
     assert_equal 4, articles_page.total_pages
   end
 
-  test "should catalog articles number increase one" do
+  test "should catalog articles number increase one when create article" do
     article = Article.new(title: 'Introduce', content: 'Introduce...', catalog_id: catalogs(:one).id)
     articles_num = article.catalog.articles_num
     article.save
     assert_equal articles_num + 1, article.catalog.articles_num
+  end
+
+  test "should catalog articles number subtract one when destroy article" do
+    article = articles(:one)
+    articles_num = article.catalog.articles_num
+    article.destroy
+
+    assert_equal articles_num - 1, Catalog.find(article.catalog_id).articles_num
+  end
+
+  test "should destroy success when catalog don't bind catalog" do
+    article = articles(:two)
+    article.destroy
   end
 
   private

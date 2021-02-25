@@ -72,10 +72,19 @@ class ArticlesControllerTest < ActionController::TestCase
     assert !catalog_ids.empty?                   
   end
 
-  test "should descript test case" do
+  test "should increase articles num by catalogs when create article" do
     articles_num = catalogs(:one).articles_num
     post :create, article: { content: @article.content, description: @article.description, title: @article.title, catalog_id: catalogs(:one).id }
 
     assert_equal articles_num + 1, assigns(:article).catalog.articles_num
+  end
+
+  test "should minus articles num by catalog when destroy article" do
+    catalog = @article.catalog
+    articles_num = catalog.articles_num
+    assert articles_num > 0
+    delete :destroy, id: @article
+
+    assert_equal articles_num - 1, Catalog.find(@article.catalog_id).articles_num
   end
 end
