@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
 
   belongs_to :catalog
 
-  before_create :increase_articles_num
+  after_create :increase_articles_num
   after_destroy :minus_articles_num
 
   def self.list
@@ -20,7 +20,9 @@ class Article < ActiveRecord::Base
   private
   
     def increase_articles_num
-      catalog.articles_num += 1 if catalog
+      return true unless catalog_id
+      catalog.articles_num += 1
+      catalog.save
     end
 
     def minus_articles_num
