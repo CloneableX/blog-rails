@@ -25,7 +25,19 @@
   </div>
   <div class="field">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
+    <nav>
+      <div class="nav nav-tabs" role="tablist">
+        <a id="content-tab" href="#content" class="nav-link active" data-toggle="tab" href="content" role="tab" aria-controls="content" aria-selected="true">Write</a>
+        <a id="preview-tab" href="#preview" class="nav-link" data-toggle="tab" href="content" role="tab" aria-controls="preview" aria-selected="true">Preview</a>
+      </div>
+    </nav>
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+        <%= f.text_area :content %>
+      </div>
+      <div class="tab-pane fade" id="preview" role="tabpanel" aria-labelledby="content-tab">
+      </div>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
