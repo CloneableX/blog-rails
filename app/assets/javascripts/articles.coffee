@@ -2,8 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
-  md = window.markdownit({
+$(document).on 'turbolinks:load', ->
+  md = window.markdownit {
       highlight: (str, lang) -> 
         if lang and hljs.getLanguage(lang)
           try
@@ -15,6 +15,6 @@ $(document).ready ->
           catch __
         else
           "<pre class='hljs'><code>#{md.utils.escapeHtml(str)}</code></pre>"
-    })
+    }
   $('#preview-tab').click ->
-    $('#preview').html md.render($('#article_content').val())
+    $('#preview').html md.render $('#article_content').val()

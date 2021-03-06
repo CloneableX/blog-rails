@@ -1,5 +1,7 @@
-<h1>New Article</h1>
+<div class="d-flex justify-content-between align-items-center">
+  <h1>New Article</h1>
+  <%= link_to 'Back', articles_path, class: "btn btn-secondary" %>
+</div>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', articles_path %>

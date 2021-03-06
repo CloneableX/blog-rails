@@ -5,5 +5,5 @@
   <%= @catalog.title %>
 </p>
 
-<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
-<%= link_to 'Back', catalogs_path %>
+<%= link_to 'Edit', edit_catalog_path(@catalog), class: "btn btn-primary" %>
+<%= link_to 'Back', catalogs_path, class: "btn btn-secondary" %>

@@ -1,4 +1,4 @@
-<%= form_for(@article) do |f| %>
+<%= form_for(@article, html: { class: "needs-validation w-75 m-auto", novalidate: true}) do |f| %>
   <% if @article.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
@@ -11,35 +11,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :catalog_id %>
-    <%= f.select :catalog_id, Catalog.all.collect { |catalog| [catalog.title, catalog.id] }, prompt: '--select--' %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <nav>
-      <div class="nav nav-tabs" role="tablist">
-        <a id="content-tab" href="#content" class="nav-link active" data-toggle="tab" href="content" role="tab" aria-controls="content" aria-selected="true">Write</a>
-        <a id="preview-tab" href="#preview" class="nav-link" data-toggle="tab" href="content" role="tab" aria-controls="preview" aria-selected="true">Preview</a>
-      </div>
-    </nav>
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
-        <%= f.text_area :content %>
-      </div>
-      <div class="tab-pane fade" id="preview" role="tabpanel" aria-labelledby="content-tab">
+  <div class="form-group row mb-3">
+    <%= f.label :title, class: "col-sm-2 col-form-label" %><br>
+    <div class="col-sm-10">
+      <%= f.text_field :title, class: "form-control", required: true, maxlength: 50 %>
+      <div class="invalid-feedback">
+        Please input title.
       </div>
     </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group row">
+    <%= f.label :catalog_id, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= f.select :catalog_id, Catalog.all.collect { |catalog| [catalog.title, catalog.id] }, { prompt: "--select--" }, { class: "custom-select" } %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= f.label :description, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= f.text_area :description, class: "form-control", maxlength: 200 %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= f.label :content, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10 h-100 content-area">
+      <nav>
+        <div class="nav nav-tabs" role="tablist">
+          <a id="content-tab" href="#content" class="nav-link active" data-toggle="tab" href="content" role="tab" aria-controls="content" aria-selected="true">Write</a>
+          <a id="preview-tab" href="#preview" class="nav-link" data-toggle="tab" href="content" role="tab" aria-controls="preview" aria-selected="true">Preview</a>
+        </div>
+      </nav>
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="content" role="tabpanel" aria-labelledby="content-tab">
+          <%= f.text_area :content, rows: 20, class: "form-control", required: true, maxlength: 200000  %>
+          <div class="invalid-feedback">
+            Please input content.
+          </div>
+        </div>
+        <div class="tab-pane fade" id="preview" role="tabpanel" aria-labelledby="content-tab">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    <%= f.submit 'Save Article', class: "btn btn-success" %>
   </div>
 <% end %>
